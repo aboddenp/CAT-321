@@ -7,3 +7,6 @@ Umlet: contains software for creating and modify UML’s
  Beacon Code: 
  - Has code used by the SenseHat 
  - main.py is the beaconLight code 
+ 
+ src: 
+ - Project code 
