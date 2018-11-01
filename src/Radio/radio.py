@@ -14,6 +14,11 @@ import serial
 # synchronus: This means the method waits until the transmit status response is received
 # asynchronous: application does not block during the transmit process. send_data_async()
 
+def my_data_received_callback(xbee_message):
+	address = xbee_message.remote_device.get_64bit_addr()
+	data = xbee_message.data.decode("utf8")
+	print(xbee_message.data)
+	print("Received data from %s: %s" % (address, data))
 
 #recieve data 
 
@@ -71,16 +76,24 @@ class Radio:
 	def setUP(self):
 
 		self.device.open()
-
-		def my_data_received_callback(xbee_message):
-			address = xbee_message.remote_device.get_64bit_addr()
-			data = xbee_message.data.decode("utf8")
-			print("Received data from %s: %s" % (address, data))
-
 		self.device.add_data_received_callback(my_data_received_callback)
 
 
 	def terminate(self):
+		self.device.del_data_received_callback(my_data_received_callback)
 		self.closeConnection()
 
+
+# testing using a main 
+def main():
+	radio = Radio() 
+	radio.setUP()
+	print("0 to stop")
+	x = 0
+	while(x == 0):
+		x = int(input())
+	print("done")
+	radio.terminate()
+
+main() 
 
