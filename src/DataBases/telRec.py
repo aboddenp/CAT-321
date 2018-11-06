@@ -9,33 +9,57 @@ class telRec:
 		self.roll = dict.get('Roll')
 		self.pitch = dict.get('Pitch')
 		self.yaw = dict.get('Yaw')
-		FC = 0
+		self.FC = 0
+
+	def __str__(self):
+		str = "Telemetry Record: \n"
+		str+= "--"*10 
+		str += f"\nLatitude = {self.lat}\nLongitude = {self.long}\nAltitude = {self.alt}\n\
+Temperature = {self.temp}\nHumidity = {self.hum}\n\
+Roll = {self.roll}\nPitch = {self.pitch}\nYaw = {self.yaw}\nFC = {self.FC}"
+		return str
+	def __repr__(self):
+		str = "Telemetry Record: \n"
+		str+= "--"*10 
+		str += f"\nLatitude = {self.lat}\nLongitude = {self.long}\nAltitude = {self.alt}\n\
+Temperature = {self.temp}\nHumidity = {self.hum}\n\
+Roll = {self.roll}\nPitch = {self.pitch}\nYaw = {self.yaw}\nFC = {self.FC}"
+		return str 
+
 	
 #the following methods are all similar, just for different attributes
 
-	def setLatitude (lat):
-		dict['latitude'] = lat
+	def setLatitude (self,lat):
+		#dict['latitude'] = lat
+		self.lat  = lat 
 
-	def setLongitude (lon):	
-		telRec['longitude'] = lon	
+	def setLongitude (self, lon):	
+		#telRec['longitude'] = lon
+		self.lon  = lon
 
-	def setAltitude (alt):
-		dict['altitude'] = alt
+	def setAltitude (self,alt):
+		#dict['altitude'] = alt
+		self.alt = alt
 
-	def setTemperature (temp):
-		dict['temperature'] = temp
+	def setTemperature (self,temp):
+		#dict['temperature'] = temp
+		self.temp  = temp
 	
-	def setHumidity (hum):
-		dict['humidity'] = hum
+	def setHumidity (self,hum):
+		#dict['humidity'] = hum
+		self.hum  = hum
 	
-	def setRoll (roll):
-		dict['roll'] = roll
+	def setRoll (self,roll):
+		#dict['roll'] = roll
+		self.roll  = roll
 
-	def setPitch (pitch):
-		dict['pitch'] = pitch
+	def setPitch (self,pitch):
+		#dict['pitch'] = pitch
+		self.pitch  = pitch
 
-	def setYaw (yaw):
-		dict['yaw'] = yaw
+	def setYaw (self,yaw):
+		#dict['yaw'] = yaw
+		self.yaw = yaw 
 
-	def addFC (faultC):
-		FC = faultC
+	def addFC (self,faultC):
+		self.FC = faultC
