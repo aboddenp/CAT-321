@@ -5,9 +5,9 @@ class command:
 	# as well as map a command to a weight to be used in the priority queue 
 	# ?? should the message itself include the priority of the command, or should the priorities be static 
 	
-	def __init__(self,message):
+	def __init__(self,XbeeMessage):
 		#self.data = message.data
-		self.decoded = 0 # still have to figure how commands will work 
+		self.code = XbeeMessage.data # still have to figure how commands will work 
 		self.weight = self.calculateWeight()
 		#self.timestamp = message.timestamp
 

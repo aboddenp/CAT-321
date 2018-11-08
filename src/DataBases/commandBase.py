@@ -25,7 +25,6 @@ class commandBase:
 			return None 
 	# @param self object instance
 	# @param command to add to database
-	# @param wight the priority of the command 
 	# @return true if command added succesfully 
 	def addCommand(self,command):
 		Queue.put_nowait(command.weight, command)

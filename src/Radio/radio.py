@@ -14,20 +14,24 @@ import serial
 # synchronus: This means the method waits until the transmit status response is received
 # asynchronous: application does not block during the transmit process. send_data_async()
 
-def my_data_received_callback(xbee_message):
-	address = xbee_message.remote_device.get_64bit_addr()
-	data = xbee_message.data.decode("utf8")
-	print(xbee_message.data)
-	print("Received data from %s: %s" % (address, data))
+#The idea for the callback is to add the command to the command database every time a message is recieved 
+
+#def my_data_received_callback(xbee_message):
+#	address = xbee_message.remote_device.get_64bit_addr()
+#	data = xbee_message.data.decode("utf8")
+#	print(xbee_message.data)
+#	print("Received data from %s: %s" % (address, data))
 
 #recieve data 
 
 class Radio:
+	#commandDB where all commands will be stored 
+	commandDB = None 
+
 	def __init__(self):
 		self.serialPort = "/dev/tty.SLAB_USBtoUART" # port where Xbee is connected find by doing ls /dev/tty* on terminal	
 		self.device = XBeeDevice(self.serialPort,9600)
 		self.remote_device = RemoteXBeeDevice(self.device, XBee64BitAddress.from_hex_string("0013A200406343f7")) # "0013A20040XXXXXX"
-
 
 	def __repr__(self):
 		return "Xbee Device at Port {0}\nopen = {1}".format(self.serialPort,self.device.is_open())
@@ -38,7 +42,6 @@ class Radio:
 		if (self.device.is_open() == False and self.device != None):
 			self.device.open()
 		
-	
 
 	def closeConnection(self):
 		if (self.device.is_open() and self.device != None):
@@ -56,29 +59,22 @@ class Radio:
 		finally:
 			self.closeConnection()
 
-	# def recieve(self): # data has to be a string or byte array
-	# 	#try: 
-	# 	print("waiting for data....")
-	# 	self.openConnection()
-	# 	#xbeeMessage = device.wait_read_frame()
-	# 	xbeeMessage = self.device.read_data_from(self.remote_device)
-	# 	print(xbeeMessage)
-	# 	# should create a command class that will store the time stop and the data 
-	# 	if (xbeeMessage != None):
-	# 		printf(xbeeMessage.data)
-	# 		return xbeeMessage.data;
-	# 	#except:
-	# 	#print("something went wrong when recieving data")
-	# 	#finally: 
-	# 	self.closeConnection()
+	#This code will be run when an xbee_message has been recieved 
+	def my_data_received_callback(xbee_message):
+		address = xbee_message.remote_device.get_64bit_addr()
+		data = xbee_message.data.decode("utf8")
+		print(xbee_message.data)
+		print("Received data from %s: %s" % (address, data))
 
 
-	def setUP(self):
-
+	# opens the xbee device and sets the recieve call back 
+	# parameters: database = command database to store commands 
+	def setUP(self, dataBase):
+		commandDB = dataBase #initialize commandDB
 		self.device.open()
 		self.device.add_data_received_callback(my_data_received_callback)
 
-
+	#close xbeeconnection and delete callback 
 	def terminate(self):
 		self.device.del_data_received_callback(my_data_received_callback)
 		self.closeConnection()
