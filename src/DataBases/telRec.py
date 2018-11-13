@@ -1,5 +1,5 @@
 class telRec:
-
+	#don't forget to fetch before you code!!!
 	def __init__(self, dict):
 		self.lat = dict.get('Latitude')
 		self.long = dict.get('Longitude')
