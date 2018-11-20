@@ -1,7 +1,7 @@
 import queue
 
 # commandBase is initialized with a radio object it needs to handle 
-class commandBase: 
+class CommandBase: 
 
 	def __init__(self): # should 
 		#priority queue constructor gets a maximum size paramter, if 0 size can be infinity 

@@ -1,18 +1,19 @@
-from radio import Radio 
-from commandBase import commandBase
-from command import command 
+from DataBases.commandBase import CommandBase
+from Radio.radio import Radio
+from DataBases.command import Command
 
 def main():
+	#initializes Radio and command dataBase 
+	cmdDB = CommandBase()
+	radio = Radio()
+	#Setting up radio call back and initializing the internal dataBase 
+	radio.setUP(cmdDB)
 
-	# initializes radio 
-	radio = Radio() 
-	#initializes command DataBase 
-	cmdDB = commandBase()
-
-	#constantly recieve data and store in command object and put in database
-	# still have to take into consideration how duplicates commands will be handled 
-	while(True): 
-		message = radio.recieve()
-		if(message != None):
-			Newcommand = command(message) #convert data recieve into a command object 
-			cmdDB.addCommand(comand)
+	while(True):
+		try:
+			#some code to run 
+			print("hello World")
+		except (KeyboardInterrupt):
+			print("terminated")
+			radio.terminate()
+main()

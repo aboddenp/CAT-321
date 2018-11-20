@@ -1,4 +1,4 @@
-class command: 
+class Command: 
 
 	#initializes a command object the function of this class is still uknown 
 	# ideas: This class could be responsible of decoding the commands we recieve from ground 

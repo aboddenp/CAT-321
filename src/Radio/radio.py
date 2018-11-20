@@ -8,8 +8,8 @@ import sys
 sys.path.append('../')
 
 # our own modules: 
-from DataBases.commandBase import commandBase
-from DataBases.command import command
+from DataBases.commandBase import CommandBase
+from DataBases.command import Command
 
 # send data 
 # questions to decide on 
@@ -26,22 +26,11 @@ from DataBases.command import command
 
 #This code will be run when an xbee_message has been recieved 
 
-commandDB = commandBase()
-
-def my_data_received_callback(xbee_message):
-	address = xbee_message.remote_device.get_64bit_addr()
-	data = xbee_message.data.decode("utf8")
-
-	#store the XBbee into a command object for decoding etc...
-	command = command(xbee_message)
-	# add this command to the command dataBase
-	commandDB.addCommand(command)
+commandDB = None 
 
 
-	print(xbee_message.data)
-	print("Received data from %s: %s" % (address, data))
 
-#recieve data 
+
 
 class Radio:
 	#commandDB where all commands will be stored 
@@ -79,29 +68,40 @@ class Radio:
 
 
 
+	def my_data_received_callback(xbee_message):
+		address = xbee_message.remote_device.get_64bit_addr()
+		data = xbee_message.data.decode("utf8")
+
+		#store the XBbee into a command object for decoding etc...
+		command = command(xbee_message)
+		# add this command to the command dataBase
+		commandDB.addCommand(command)
+		print(xbee_message.data)
+		print("Received data from %s: %s" % (address, data))
 
 	# opens the xbee device and sets the recieve call back 
 	# parameters: database = command database to store commands 
-	def setUP(self):
-		self.device.open()
-		self.device.add_data_received_callback(my_data_received_callback)
+	def setUP(self, database):
+		commandDB = database
+		self.openConnection()
+		self.device.add_data_received_callback(Radio.my_data_received_callback)
 
 	#close xbeeconnection and delete callback 
 	def terminate(self):
-		self.device.del_data_received_callback(my_data_received_callback)
+		self.device.del_data_received_callback(Radio.my_data_received_callback)
 		self.closeConnection()
 
 
-# testing using a main 
-def main():
-	radio = Radio() 
-	radio.setUP()
-	print("1 to stop")
-	x = 0
-	while(x == 0):
-		x = int(input())
-	print("done")
-	radio.terminate()
+# # testing using a main 
+#def main():
+# 	radio = Radio() 
+# 	radio.setUP()
+# 	print("1 to stop")
+# 	x = 0
+# 	while(x == 0):
+# 		x = int(input())
+# 	print("done")
+# 	radio.terminate()
 
-main() 
+# main() 
 
