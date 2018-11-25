@@ -10,3 +10,9 @@ Umlet: contains software for creating and modify UML’s
  
  src: 
  - Project code 
+ 
+ Pending Tasks: 
+  Telemetry Record DataBase
+  TCP client code configuration 
+  How The data in telRec will be sent 
+  
