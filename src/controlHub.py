@@ -12,7 +12,8 @@ def main():
 	while(True):
 		try:
 			#some code to run 
-			print("hello World")
+			radio.send("Hello there general kenobi")
+			x = True
 		except (KeyboardInterrupt):
 			print("terminated")
 			radio.terminate()

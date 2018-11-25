@@ -26,19 +26,17 @@ from DataBases.command import Command
 
 #This code will be run when an xbee_message has been recieved 
 
-commandDB = None 
-
-
-
-
+#commandDB = None 
 
 class Radio:
 	#commandDB where all commands will be stored 
-
+	commandDB = None ; 
 	def __init__(self):
 		self.serialPort = "/dev/tty.SLAB_USBtoUART" # port where Xbee is connected find by doing ls /dev/tty* on terminal	
 		self.device = XBeeDevice(self.serialPort,9600)
 		self.remote_device = RemoteXBeeDevice(self.device, XBee64BitAddress.from_hex_string("0013A200406343f7")) # "0013A20040XXXXXX"
+		self.callback = None; # strores a reference to the radio callback function 
+
 
 	def __repr__(self):
 		return "Xbee Device at Port {0}\nopen = {1}".format(self.serialPort,self.device.is_open())
@@ -57,51 +55,34 @@ class Radio:
 
 	def send(self, data):
 		try:
-			self.openConnection()
+			#self.openConnection()
 			#self.device.send_data_broadcast(data)
-			self.device.send_data(self.remote_device,data)
-			#self.device.send_data_async(remote_device,data)
-		except : 
+			#self.device.send_data(self.remote_device,data)
+			self.device.send_data_async(self.remote_device,data) #sent async
+		except: 
 			print("something went wrong when sending data")
-		finally:
-			self.closeConnection()
 
 
 
 	def my_data_received_callback(xbee_message):
 		address = xbee_message.remote_device.get_64bit_addr()
 		data = xbee_message.data.decode("utf8")
-
 		#store the XBbee into a command object for decoding etc...
-		command = command(xbee_message)
+		command = Command(xbee_message)
 		# add this command to the command dataBase
-		commandDB.addCommand(command)
-		print(xbee_message.data)
+		Radio.commandDB.addCommand(command)
 		print("Received data from %s: %s" % (address, data))
 
 	# opens the xbee device and sets the recieve call back 
 	# parameters: database = command database to store commands 
 	def setUP(self, database):
-		commandDB = database
+		Radio.commandDB = database
 		self.openConnection()
-		self.device.add_data_received_callback(Radio.my_data_received_callback)
+		self.callback = Radio.my_data_received_callback
+		self.device.add_data_received_callback(self.callback)
+
 
 	#close xbeeconnection and delete callback 
 	def terminate(self):
-		self.device.del_data_received_callback(Radio.my_data_received_callback)
+		#self.device.del_data_received_callback(self.callback)
 		self.closeConnection()
-
-
-# # testing using a main 
-#def main():
-# 	radio = Radio() 
-# 	radio.setUP()
-# 	print("1 to stop")
-# 	x = 0
-# 	while(x == 0):
-# 		x = int(input())
-# 	print("done")
-# 	radio.terminate()
-
-# main() 
-

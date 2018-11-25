@@ -8,6 +8,7 @@ class Command:
 	def __init__(self,XbeeMessage):
 		#self.data = message.data
 		self.code = XbeeMessage.data # still have to figure how commands will work 
+		self.data = code.decode("utf8") # Command String 
 		self.weight = self.calculateWeight()
 		#self.timestamp = message.timestamp
 
