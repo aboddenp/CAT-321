@@ -5,7 +5,7 @@ class telemetryDB:
 		self.recordCount = 0
 
 	#We are adding an entire telemetry record each time and also incrementing our counter
-	def addRecord(t):
+	def addRecord(telRec):
 		self.telemetry.append(telRec)
 		self.recordCount += 1
 
