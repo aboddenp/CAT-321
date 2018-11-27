@@ -1,6 +1,8 @@
 class telemetryDB:
-	telemetry = []
-	recordCount = 0
+
+	def __init__(self, telemetry):
+		self.telemetry = []
+		self.recordCount = 0
 
 	#We are adding an entire telemetry record each time and also incrementing our counter
 	def addRecord(t):
