@@ -2,7 +2,7 @@
 # 
 # Flight Command and Telemetry
 # 
-# GPS Objective:
+# GPS Objective: 
 # >recieve a csv file containing gps data, from Sensor Collection Team such as: 
 #  latitude, longitude, altitude
 # 
