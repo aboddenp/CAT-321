@@ -23,7 +23,7 @@ class telRec:
 		str+= "--"*10 
 		str += f"\nTime = {self.time}\nLatitude = {self.lat}\nLongitude = {self.long}\nCourse = {self.course}\n\
 		Altitude = {self.alt}\nHumidity = {self.hum}\nTemperature = {self.temp}\nPressure = {self.pressure}\n \
-		Roll = {self.roll}\nPitch = {self.pitch}\nYaw = {self.yaw}\nX = {self.x}\nY = {self.Y}\nZ = {self.z}\n\
+		Roll = {self.roll}\nPitch = {self.pitch}\nYaw = {self.yaw}\nX = {self.x}\nY = {self.y}\nZ = {self.z}\n\
 		Speed = {self.speed}\nFC = {self.FC}"
 		return str
 	def __repr__(self):
