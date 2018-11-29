@@ -33,8 +33,8 @@ class telRec:
 		Altitude = {self.alt}\nHumidity = {self.hum}\nTemperature = {self.temp}\nPressure = {self.pressure}\n \
 		Roll = {self.roll}\nPitch = {self.pitch}\nYaw = {self.yaw}\nX = {self.x}\nY = {self.Y}\nZ = {self.z}\n\
 		Speed = {self.speed}\nFC = {self.FC}"
-		return str 
-
+		return str
+ 
 	
 #the following methods are all similar, just for different attributes
 
