@@ -59,7 +59,7 @@ class Radio:
 			#self.device.send_data_broadcast(data)
 			#self.device.send_data(self.remote_device,data)
 			self.device.send_data_async(self.remote_device,data) #sent async
-		except: 
+		except(KeyboardInterrupt): 
 			print("something went wrong when sending data")
 
 
