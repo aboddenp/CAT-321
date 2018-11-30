@@ -29,7 +29,7 @@ def main():
 
 	while(True):
 		try:
-			if(!cmdDB.isEmpty()): 
+			if(!(cmdDB.isEmpty())): 
 				command = cmdDB.getCommand() #get a fresh command
 				#execute command
 
@@ -38,7 +38,7 @@ def main():
 				data = s.recv(BUFFER_SIZE) #recieves sata 
 				teleDB.append(parseData(data)) # save in data base 
 
-				# send last record in intervals 
+				# send last record in intervals
 
 		except (KeyboardInterrupt, socket.error):
 			print("terminated") # close Xbee connection 
