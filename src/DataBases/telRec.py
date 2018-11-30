@@ -12,6 +12,7 @@ class telRec:
 		self.pressure = dict.get('Pressure')
 		self.hum = dict.get('Humidity')
 		self.FC = 0
+		self.everything = dict.values() 
 
 	def __str__(self):
 		str = "Telemetry Record: \n"

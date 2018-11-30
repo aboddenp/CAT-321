@@ -12,7 +12,9 @@ class Command:
 		self.weight = self.calculateWeight()
 		#self.timestamp = message.timestamp
 
+	# this will be nice if the weight was embeded in the data recieved 
 	def calculateWeight(self):
 		return 0 
+	#still waiting on how the instructions will be sent 
 	def getInstruction(self): 
 		return self.data 
