@@ -29,7 +29,7 @@ def main():
 
 	while(True):
 		try:
-			if(!(cmdDB.isEmpty())): 
+			if(cmdDB.isEmpty() == False): 
 				command = cmdDB.getCommand() #get a fresh command
 				#execute command
 

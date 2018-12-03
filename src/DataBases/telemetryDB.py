@@ -1,4 +1,4 @@
-from telRec import telRec
+#from telRec import telRec 
 class telemetryDB:
 
 	def __init__(self):
@@ -22,12 +22,12 @@ class telemetryDB:
 	def getRecord(self,i):
 		return self.telemetry[i]
 
-def main (): 
-	t = telemetryDB()
-	dic = {} 
-	a = telRec(dic)
-	t.addRecord(a)
-	print(t.getNumRec())
-	print(t.getLastRecord())
-	print(t.getRecord(0))
-main()
+#def main (): 
+#	t = telemetryDB()
+#	dic = {} 
+#	a = telRec(dic)
+#	t.addRecord(a)
+#	print(t.getNumRec())
+#	print(t.getLastRecord())
+#	print(t.getRecord(0))
+#main()
