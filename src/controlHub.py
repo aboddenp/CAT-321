@@ -23,6 +23,7 @@ def main():
 	radio = Radio()
 	#Setting up radio call back and initializing the internal dataBase 
 	radio.setUP(cmdDB)
+	print("Im here")
 	# open socket for tcpclient 
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	connectServer(); 
@@ -37,6 +38,7 @@ def main():
 			s.send(MESSAGE) 
 			data = s.recv(BUFFER_SIZE) #recieves sata 
 			teleDB.append(parseData(data)) # save in data base 
+			radio.send(data)
 
 			# send last record in intervals
 

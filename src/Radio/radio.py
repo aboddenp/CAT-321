@@ -44,12 +44,12 @@ class Radio:
 		return "Xbee Device at Port {0}\nopen = {1}".format(self.serialPort,self.device.is_open())
 
 	def openConnection(self):
-		if (self.device.is_open() == False and self.device != None):
+		if (self.device != None and self.device.is_open() == False):
 			self.device.open()
 		
 
 	def closeConnection(self):
-		if (self.device.is_open() and self.device != None):
+		if (self.device != None and self.device.is_open()):
 			self.device.close()
 	
 
